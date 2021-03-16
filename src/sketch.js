@@ -69,16 +69,16 @@ function draw() {
 
 function keyPressed() {
   if (keyCode == 87) {
-    gamecube.shiftCubiesUp();
+    gamecube.shiftCubiesNorth();
   } else if (keyCode === 83) {
-    gamecube.shiftCubiesDown();
+    gamecube.shiftCubiesSouth();
   } else if (keyCode === 65) {
     gamecube.shiftCubiesWest();
   } else if (keyCode === 68) {
     gamecube.shiftCubiesEast();
   } else if (keyCode === 81) {
-    gamecube.shiftCubiesNorth();
+    gamecube.shiftCubiesUp();
   } else if (keyCode === 69) {
-    gamecube.shiftCubiesSouth();
+    gamecube.shiftCubiesDown();
   }
 }
