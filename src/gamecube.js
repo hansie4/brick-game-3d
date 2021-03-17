@@ -1,7 +1,7 @@
 class Gamecube {
     constructor() {
         this.gameboard = this.initGameboard();
-        this.isLost = false;
+        this.gameOver = false;
         this.addRandomCubie();
         this.addRandomCubie();
         this.addRandomCubie();
@@ -33,6 +33,74 @@ class Gamecube {
             }
         }
         return true;
+    }
+
+    canMakeMove() {
+        for (let x = 0; x < N; x++) {
+            for (let y = 0; y < N; y++) {
+                for (let z = 0; z < N; z++) {
+                    let currentCubieValue = this.gameboard[x][y][z];
+                    if (currentCubieValue !== 0) {
+                        // checking adjacent on x-axis
+                        if (x === 0) {
+                            if (this.gameboard[x + 1][y][z] === 0 || this.gameboard[x + 1][y][z] === currentCubieValue) {
+                                return true;
+                            }
+                        } else if (x === (N - 1)) {
+                            if (this.gameboard[x - 1][y][z] === 0 || this.gameboard[x - 1][y][z] === currentCubieValue) {
+                                return true;
+                            }
+                        } else {
+                            if (this.gameboard[x + 1][y][z] === 0 ||
+                                this.gameboard[x + 1][y][z] === currentCubieValue ||
+                                this.gameboard[x - 1][y][z] === 0 ||
+                                this.gameboard[x - 1][y][z] === currentCubieValue) {
+                                return true;
+                            }
+                        }
+
+                        // checking adjacent on y-axis
+                        if (y === 0) {
+                            if (this.gameboard[x][y + 1][z] === 0 || this.gameboard[x][y + 1][z] === currentCubieValue) {
+                                return true;
+                            }
+                        } else if (y === (N - 1)) {
+                            if (this.gameboard[x][y - 1][z] === 0 || this.gameboard[x][y - 1][z] === currentCubieValue) {
+                                return true;
+                            }
+                        } else {
+                            if (this.gameboard[x][y + 1][z] === 0 ||
+                                this.gameboard[x][y + 1][z] === currentCubieValue ||
+                                this.gameboard[x][y - 1][z] === 0 ||
+                                this.gameboard[x][y - 1][z] === currentCubieValue) {
+                                return true;
+                            }
+                        }
+
+                        // checking adjacent on z-axis
+                        if (z === 0) {
+                            if (this.gameboard[x][y][z + 1] === 0 || this.gameboard[x][y][z + 1] === currentCubieValue) {
+                                return true;
+                            }
+                        } else if (z === (N - 1)) {
+                            if (this.gameboard[x][y][z - 1] === 0 || this.gameboard[x][y][z - 1] === currentCubieValue) {
+                                return true;
+                            }
+                        } else {
+                            if (this.gameboard[x][y][z + 1] === 0 ||
+                                this.gameboard[x][y][z + 1] === currentCubieValue ||
+                                this.gameboard[x][y][z - 1] === 0 ||
+                                this.gameboard[x][y][z - 1] === currentCubieValue) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     calculateScore() {

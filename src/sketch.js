@@ -1,7 +1,7 @@
 const VIEWPORT_WIDTH = 600;
 const VIEWPORT_HEIGHT = 600;
 
-const BLOCK_SIZE = 50;
+const BLOCK_SIZE = 70;
 const N = 4;
 
 let scoreElement;
@@ -34,25 +34,34 @@ function draw() {
 }
 
 function keyPressed() {
-  if (keyCode == 87) {
-    gamecube.shiftCubiesNorth();
-  } else if (keyCode === 83) {
-    gamecube.shiftCubiesSouth();
-  } else if (keyCode === 65) {
-    gamecube.shiftCubiesEast();
-  } else if (keyCode === 68) {
-    gamecube.shiftCubiesWest();
-  } else if (keyCode === 81) {
-    gamecube.shiftCubiesUp();
-  } else if (keyCode === 69) {
-    gamecube.shiftCubiesDown();
-  } else if (keyCode === 13) {
-    gamecube.addRandomCubie();
-  } else if (keyCode === 16) {
-    console.log(gamecube.gameboard);
+  if (!gamecube.gameOver) {
+    if (keyCode == 87) {
+      gamecube.shiftCubiesNorth();
+    } else if (keyCode === 83) {
+      gamecube.shiftCubiesSouth();
+    } else if (keyCode === 65) {
+      gamecube.shiftCubiesEast();
+    } else if (keyCode === 68) {
+      gamecube.shiftCubiesWest();
+    } else if (keyCode === 81) {
+      gamecube.shiftCubiesUp();
+    } else if (keyCode === 69) {
+      gamecube.shiftCubiesDown();
+    } else if (keyCode === 13) {
+      gamecube.addRandomCubie();
+    } else if (keyCode === 16) {
+      console.log(gamecube.gameboard);
+    }
   }
 
-  gamecube.addRandomCubie();
+  gamecube.gameOver = !gamecube.canMakeMove();
+
+  if (!gamecube.gameOver) {
+    gamecube.addRandomCubie();
+  } else {
+    // YOU LOST
+  }
+
   gamecube.calculateScore();
   scoreElement.html('Score: ' + gamecube.score);
   greatestValueElement.html('Greatest cubie: ' + gamecube.getGreatestCubieValue());
