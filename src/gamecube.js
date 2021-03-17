@@ -49,6 +49,20 @@ class Gamecube {
         this.score = score;
     }
 
+    getGreatestCubieValue() {
+        let greatestValue = -1;
+        for (let x = 0; x < N; x++) {
+            for (let y = 0; y < N; y++) {
+                for (let z = 0; z < N; z++) {
+                    if (this.gameboard[x][y][z] > greatestValue) {
+                        greatestValue = this.gameboard[x][y][z];
+                    }
+                }
+            }
+        }
+        return greatestValue;
+    }
+
     addRandomCubie() {
         let randX;
         let randY;

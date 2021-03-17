@@ -5,6 +5,7 @@ const BLOCK_SIZE = 50;
 const N = 4;
 
 let scoreElement;
+let greatestValueElement;
 let gamecube;
 
 function setup() {
@@ -18,8 +19,10 @@ function setup() {
   gamecube = new Gamecube();
 
   scoreElement = select("#gameScore");
+  greatestValueElement = select("#gameGreatestCubieValue");
 
   scoreElement.html('Score: ' + gamecube.score);
+  greatestValueElement.html('Greatest cubie: ' + gamecube.getGreatestCubieValue());
 }
 
 function draw() {
@@ -52,4 +55,5 @@ function keyPressed() {
   gamecube.addRandomCubie();
   gamecube.calculateScore();
   scoreElement.html('Score: ' + gamecube.score);
+  greatestValueElement.html('Greatest cubie: ' + gamecube.getGreatestCubieValue());
 }
