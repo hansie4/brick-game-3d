@@ -20,9 +20,11 @@ function setup() {
 
   scoreElement = select("#gameScore");
   greatestValueElement = select("#gameGreatestCubieValue");
+  gameoverElement = select("#gameover")
 
   scoreElement.html('Score: ' + gamecube.score);
   greatestValueElement.html('Greatest cubie: ' + gamecube.getGreatestCubieValue());
+  gameoverElement.html('GAME IN PROGRESS')
 }
 
 function draw() {
@@ -37,16 +39,22 @@ function keyPressed() {
   if (!gamecube.gameOver) {
     if (keyCode == 87) {
       gamecube.shiftCubiesNorth();
+      gamecube.addRandomCubie();
     } else if (keyCode === 83) {
       gamecube.shiftCubiesSouth();
+      gamecube.addRandomCubie();
     } else if (keyCode === 65) {
       gamecube.shiftCubiesEast();
+      gamecube.addRandomCubie();
     } else if (keyCode === 68) {
       gamecube.shiftCubiesWest();
+      gamecube.addRandomCubie();
     } else if (keyCode === 81) {
       gamecube.shiftCubiesUp();
+      gamecube.addRandomCubie();
     } else if (keyCode === 69) {
       gamecube.shiftCubiesDown();
+      gamecube.addRandomCubie();
     } else if (keyCode === 13) {
       gamecube.addRandomCubie();
     } else if (keyCode === 16) {
@@ -56,10 +64,8 @@ function keyPressed() {
 
   gamecube.gameOver = !gamecube.canMakeMove();
 
-  if (!gamecube.gameOver) {
-    gamecube.addRandomCubie();
-  } else {
-    // YOU LOST
+  if (gamecube.gameOver) {
+    gameoverElement.html('GAME OVER')
   }
 
   gamecube.calculateScore();
